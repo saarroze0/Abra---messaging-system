@@ -8,3 +8,4 @@ class Message_contains(models.Model):
     message = models.TextField()
     subject = models.TextField()
     creation_date = models.DateTimeField(auto_now_add=True)
+    unread_messages = models.BooleanField(default=True)
