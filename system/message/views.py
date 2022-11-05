@@ -18,6 +18,7 @@ def sendMessage(request):
         receiver=request.data["receiver"],
         message=request.data["message"],
         subject=request.data["subject"],
+        unread_messages=request.data["unread_messages"],
     )
     newMessage.save()
 
@@ -32,6 +33,17 @@ def sendMessage(request):
 @renderer_classes([JSONRenderer])  # @@@@@@@@@@@ need to understand
 def inbox(request, user):
     receiver_messages = Message_contains.objects.filter(receiver=user)
+    # @@@@@@@@@@@ need to understand
+    serializer = MessageSerializer(receiver_messages, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+# end all messages for a specific user
+
+
+@api_view(['GET'])  # @@@@@@@@@@@ need to understand
+@renderer_classes([JSONRenderer])  # @@@@@@@@@@@ need to understand
+def unread_inbox(request, user):
+    receiver_messages = Message_contains.objects.filter(
+        receiver=user, unread_messages=True)
     # @@@@@@@@@@@ need to understand
     serializer = MessageSerializer(receiver_messages, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
