@@ -5,7 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status, generics
 from .models import Message_contains
-from .serializers import MessageSerializer
+from .serializers import MessageSerializer, OneMessage
 
 # write message
 
@@ -46,5 +46,18 @@ def unread_inbox(request, user):
         receiver=user, unread_messages=True)
     # @@@@@@@@@@@ need to understand
     serializer = MessageSerializer(receiver_messages, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+# end all messages for a specific user
+
+
+@api_view(['GET'])  # @@@@@@@@@@@ need to understand
+@renderer_classes([JSONRenderer])  # @@@@@@@@@@@ need to understand
+def readMessage(request, id):
+    receiver_message = Message_contains.objects.all()[id-1]
+    # @@@@@@@@@@@ need to understand
+    receiver_message.unread_messages = False
+    receiver_message.save()
+    # receiver = Message_contains.objects.all()[id-1]
+    serializer = MessageSerializer(receiver_message)
     return Response(serializer.data, status=status.HTTP_200_OK)
 # end all messages for a specific user

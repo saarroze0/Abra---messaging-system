@@ -8,4 +8,5 @@ urlpatterns = [
     # Get all messages for a specific user
     path('inbox/<str:user>', views.inbox),
     path('unread-inbox/<str:user>', views.unread_inbox),
+    path('readMessage/<int:id>', views.readMessage),
 ]
