@@ -8,9 +8,3 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message_contains
         fields = ['sender', 'receiver', 'subject',  'message', 'creation_date']
-
-
-class OneMessage(serializers.ModelSerializer):
-    class Meta:
-        model = Message_contains
-        fields = ['sender', 'receiver', 'subject', 'message', 'creation_date']
