@@ -61,8 +61,8 @@ def readMessage(request, id):
         return Response("Wrong ID")
 
 
-@ api_view(['DELETE'])
-@ renderer_classes([JSONRenderer])
+@api_view(['DELETE'])
+@renderer_classes([JSONRenderer])
 def deleteMessage(request, user, id):
     delete_message = Message_contains.objects.filter(
         Q(sender=user, id=id) | Q(receiver=user, id=id))

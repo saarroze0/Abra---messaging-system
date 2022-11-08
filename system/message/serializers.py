@@ -7,4 +7,4 @@ from .models import Message_contains
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message_contains
-        fields = ['sender', 'receiver', 'subject',  'message', 'creation_date']
+        fields = ['id', 'sender', 'receiver', 'subject', 'message', 'creation_date', 'unread_messages']
