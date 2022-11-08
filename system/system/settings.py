@@ -151,6 +151,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # # Default primary key field type
 # # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-CSRF_FAILURE_VIEW = 'members.views.csrf_failure'
+CSRF_FAILURE_VIEW = 'message.views.csrf_failure'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
