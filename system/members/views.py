@@ -24,7 +24,7 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return Response(status=status.HTTP_200_OK)
+        return Response("You did not connect, try again",status=status.HTTP_200_OK)
     else:
         return Response("You did not connect, try again")
 
