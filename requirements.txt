@@ -5,7 +5,7 @@ botocore==1.27.94
 certifi==2022.9.24
 charset-normalizer==2.1.1
 Django==4.1.2
-django-heroku-0.3.1
+django-heroku==0.3.1
 djangorestframework==3.14.0
 ecapture==2.0.2
 gunicorn==20.1.0
