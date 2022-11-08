@@ -72,7 +72,8 @@ def deleteMessage(request, user, id):
         delete_message.delete()
         return Response("The message deleted successfully", status=status.HTTP_200_OK)
 
-
+@api_view(['POST'])
+@renderer_classes([JSONRenderer])
 def csrf_failure(request, reason=""):
     ctx = {'message': 'some custom messages'}
     return Response("You have successfully registered", status=status.HTTP_200_OK)
