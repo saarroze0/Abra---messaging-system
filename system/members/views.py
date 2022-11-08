@@ -36,3 +36,7 @@ def register_user(request):
     password = request.data['password']
     User.objects.create_user(username=username, password=password)
     return Response("You have successfully registered", status=status.HTTP_200_OK)
+
+def csrf_failure(request, reason=""):
+    ctx = {'message': 'some custom messages'}
+    return Response("You have successfully registered", status=status.HTTP_200_OK)
