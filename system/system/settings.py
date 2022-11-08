@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from django.test.runner import DiscoverRunner
 import os
-import django_heroku
+import django_on_heroku
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -35,7 +36,7 @@ ALLOWED_HOSTS = ["system-messages.herokuapp.com"]
 
 INSTALLED_APPS = [
     'message',
-    'django_heroku',
+    'django_on_heroku',
     'members',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -151,4 +152,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
