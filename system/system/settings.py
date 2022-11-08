@@ -14,6 +14,7 @@ from pathlib import Path
 from django.test.runner import DiscoverRunner
 import os
 import django_heroku
+#dd
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
