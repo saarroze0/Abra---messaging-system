@@ -49,16 +49,17 @@ def unread_inbox(request):
 def readMessage(request, id):
     try:
         current_user = request.user
-        receiver_message = Message_contains.objects.get(pk=(id))
-        if str(receiver_message.receiver) == str(current_user) and (receiver_message.unread_messages != False):
+        receiver_message = Message_contains.objects.get(pk=(id),receiver=current_user)
+        if receiver_message.unread_messages != False:
+        # if str(receiver_message.receiver) == str(current_user) and (receiver_message.unread_messages != False):
             receiver_message.unread_messages = False
             receiver_message.save()
-            serializer = MessageSerializer(receiver_message)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response("There are no unread messages")
+        serializer = MessageSerializer(receiver_message)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+            # return Response("There are no unread messages")
     except ObjectDoesNotExist:
-        return Response("Wrong ID")
+        return Response("There are no such messages")
 
 
 @api_view(['DELETE'])
@@ -72,8 +73,8 @@ def deleteMessage(request, user, id):
         delete_message.delete()
         return Response("The message deleted successfully", status=status.HTTP_200_OK)
 
-@api_view(['POST'])
-@renderer_classes([JSONRenderer])
-def csrf_failure(request, reason=""):
-    ctx = {'message': 'some custom messages'}
-    return Response("You have successfully registered", status=status.HTTP_200_OK)
+# @api_view(['POST'])
+# @renderer_classes([JSONRenderer])
+# def csrf_failure(request, reason=""):
+#     ctx = {'message': 'some custom messages'}
+#     return Response("You have successfully registered", status=status.HTTP_200_OK)
