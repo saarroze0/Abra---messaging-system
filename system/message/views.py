@@ -37,9 +37,6 @@ def unread_inbox(request):
     current_user = request.user
     receiver_messages = Message_contains.objects.filter(
         receiver=current_user, unread_messages=True)
-    if receiver_messages.values('unread_messages') == 0:
-        return Response("No more messages available")
-
     serializer = MessageSerializer(receiver_messages, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -49,23 +46,22 @@ def unread_inbox(request):
 def readMessage(request, id):
     try:
         current_user = request.user
-        receiver_message = Message_contains.objects.get(pk=(id))
-        if str(receiver_message.receiver) == str(current_user) and (receiver_message.unread_messages != False):
+        receiver_message = Message_contains.objects.get(pk=(id),receiver=current_user)
+        if receiver_message.unread_messages:
             receiver_message.unread_messages = False
             receiver_message.save()
-            serializer = MessageSerializer(receiver_message)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response("There are no unread messages")
+        serializer = MessageSerializer(receiver_message)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     except ObjectDoesNotExist:
-        return Response("Wrong ID")
+        return Response("There are no such messages")
 
 
-@ api_view(['DELETE'])
-@ renderer_classes([JSONRenderer])
-def deleteMessage(request, user, id):
+@api_view(['DELETE'])
+@renderer_classes([JSONRenderer])
+def deleteMessage(request, id):
+    current_user = request.user
     delete_message = Message_contains.objects.filter(
-        Q(sender=user, id=id) | Q(receiver=user, id=id))
+        Q(sender=current_user, id=id) | Q(receiver=current_user, id=id))
     if not delete_message:
         return Response("Wrong user name or id")
     else:

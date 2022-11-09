@@ -7,6 +7,6 @@ urlpatterns = [
     path('inbox/', views.inbox),
     path('unread-inbox/', views.unread_inbox),
     path('readMessage/<int:id>', views.readMessage),
-    path('deleteMessage/<str:user>/<int:id>', views.deleteMessage),
+    path('deleteMessage/<int:id>', views.deleteMessage),
 
 ]

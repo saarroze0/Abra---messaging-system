@@ -1,11 +1,8 @@
-from django.shortcuts import redirect
 from django.contrib.auth import authenticate, login, logout
-
 from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 from rest_framework import status
-
 from django.contrib.auth.models import User
 
 
@@ -24,7 +21,7 @@ def login_user(request):
     user = authenticate(request, username=username, password=password)
     if user is not None:
         login(request, user)
-        return Response(status=status.HTTP_200_OK)
+        return Response("You login",status=status.HTTP_200_OK)
     else:
         return Response("You did not connect, try again")
 
@@ -36,3 +33,4 @@ def register_user(request):
     password = request.data['password']
     User.objects.create_user(username=username, password=password)
     return Response("You have successfully registered", status=status.HTTP_200_OK)
+
