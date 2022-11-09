@@ -37,9 +37,6 @@ def unread_inbox(request):
     current_user = request.user
     receiver_messages = Message_contains.objects.filter(
         receiver=current_user, unread_messages=True)
-    if receiver_messages.values('unread_messages') == 0:
-        return Response("No more messages available")
-
     serializer = MessageSerializer(receiver_messages, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -50,14 +47,11 @@ def readMessage(request, id):
     try:
         current_user = request.user
         receiver_message = Message_contains.objects.get(pk=(id),receiver=current_user)
-        if receiver_message.unread_messages != False:
-        # if str(receiver_message.receiver) == str(current_user) and (receiver_message.unread_messages != False):
+        if receiver_message.unread_messages:
             receiver_message.unread_messages = False
             receiver_message.save()
         serializer = MessageSerializer(receiver_message)
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-            # return Response("There are no unread messages")
     except ObjectDoesNotExist:
         return Response("There are no such messages")
 
@@ -73,9 +67,3 @@ def deleteMessage(request, id):
     else:
         delete_message.delete()
         return Response("The message deleted successfully", status=status.HTTP_200_OK)
-
-# @api_view(['POST'])
-# @renderer_classes([JSONRenderer])
-# def csrf_failure(request, reason=""):
-#     ctx = {'message': 'some custom messages'}
-#     return Response("You have successfully registered", status=status.HTTP_200_OK)
