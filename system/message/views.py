@@ -64,9 +64,10 @@ def readMessage(request, id):
 
 @api_view(['DELETE'])
 @renderer_classes([JSONRenderer])
-def deleteMessage(request, user, id):
+def deleteMessage(request, id):
+    current_user = request.user
     delete_message = Message_contains.objects.filter(
-        Q(sender=user, id=id) | Q(receiver=user, id=id))
+        Q(sender=current_user, id=id) | Q(receiver=current_user, id=id))
     if not delete_message:
         return Response("Wrong user name or id")
     else:
