@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "ae8e268a-c60b-4ec5-85a2-7264fb117496",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23990667"
+	},
+	"item": [
+		{
+			"name": "sign up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "{{csrftoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n\n{\n    \"username\": \"Haim\",\n    \"password\" : \"12345678qW/12\"\n\n}"
+				},
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/members/register_user/",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"members",
+						"register_user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "{{csrftoken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n\n{\n    \"username\": \"Haim\",\n    \"password\" : \"12345678qW/12\"\n\n}"
+				},
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/members/login_user/",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"members",
+						"login_user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"var xsrfCookie = postman.getResponseCookie(\"csrftoken\");postman.setEnvironmentVariable('csrftoken', xsrfCookie.value);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "{{csrftoken}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/members/logout_user/",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"members",
+						"logout_user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "send new message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var xsrfCookie = postman.getResponseCookie(\"csrftoken\");postman.setEnvironmentVariable('csrftoken', xsrfCookie.value);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "{{csrftoken}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n    \n      \n    \"receiver\" : \"Saar\",\n    \"message\":\"Saar , its Haim\",\n    \"subject\":\"Happy day\"\n    \n    \n\n   \n}\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/message/sendMessage/",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"message",
+						"sendMessage",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "inbox -Get all messages for a specific user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/message/inbox/",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"message",
+						"inbox",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete message",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"var xsrfCookie = postman.getResponseCookie(\"csrftoken\");postman.setEnvironmentVariable('csrftoken', xsrfCookie.value);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "{{csrftoken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://system-messages.herokuapp.com/message/deleteMessage/3",
+					"protocol": "https",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"message",
+						"deleteMessage",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "read message",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/message/readMessage/4",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"message",
+						"readMessage",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unread-inbox",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "{{csrftoken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/message/unread-inbox/",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"message",
+						"unread-inbox",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"var xsrfCookie = postman.getResponseCookie(\"csrftoken\");postman.setEnvironmentVariable('csrftoken', xsrfCookie.value);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-CSRFToken",
+						"value": "{{csrftoken}}",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://system-messages.herokuapp.com/admin",
+					"protocol": "http",
+					"host": [
+						"system-messages",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"admin"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "http://127.0.0.1:8000/message/sendMessage/",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "a",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n    \n    \"sender\": \"saar\",   \n    \"receiver\" : \"david\",\n    \"message\" : \"great im starter new job \",\n    \"subject\" : \"get a new job\"\n    \n\n   \n}\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/message/sendMessage/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"message",
+								"sendMessage",
+								""
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
